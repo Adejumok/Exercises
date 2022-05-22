@@ -9,12 +9,11 @@ public class Petrol {
         PetrolPurchase total = new PetrolPurchase("Badagry", "Premium", 50, 147.50, 10.00);
 
 
-        System.out.println(total.getStationLocation());
-        System.out.println(total.getPetrolType());
-        System.out.println(total.getPurchaseQuantityLiter());
-        System.out.println(total.getPricePerLiter());
-        double result = total.purchaseAmount(50, 147.50, 10.0);
-        System.out.printf("The net purchase amount is $%.2f ", result);
+        System.out.printf("The station location is %s%n", total.getStationLocation());
+        System.out.printf("The petrol type is %s%n", total.getPetrolType());
+        System.out.printf("The quantity purchased per liter is %d%n", total.getPurchaseQuantityLiter());
+        System.out.printf("The price per liter is $%.2f%n", total.getPricePerLiter());
+        System.out.printf("The net purchase amount is $%.2f ", total.purchaseAmount());
 
 
     }

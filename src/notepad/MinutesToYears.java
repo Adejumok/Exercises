@@ -1,4 +1,4 @@
-// MinutesToYears.java
+package notepad;// MinutesToYears.java
 // Convert minutes to years.
 import java.util.Scanner; // program uses Scanner
 

@@ -5,6 +5,22 @@ public class Kata {
 
     public int bitFlipper;
 
+    public static int noOfFactorsOf(int number) {
+        int factor = 0;
+        for (int i = 1; i <= number ; i++){
+            if(number % i == 0)
+                factor++;
+        }
+            return  factor;
+    }
+
+    public static boolean isPrime(int number) {
+
+            if(noOfFactorsOf(number) == 2)return true;
+
+        return false;
+    }
+
     public int add(int firstNumber, int secondNumber) {
         return (firstNumber + secondNumber);
     }
@@ -172,13 +188,15 @@ public class Kata {
     }
 
     public double accountValue(double monthlySaving) {
-        double accountValue;
+        double accountValue = 0;
         monthlySaving = 100.0;
         double annualInterestRate = 0.05;
         int months = 6;
         double monthlyInterestRate = annualInterestRate / 12;
-
-            accountValue = Math.round(monthlySaving * (months + monthlyInterestRate) * 100.0) / 100.0;
+        for (int i = 1; i <= 6 ; i++) {
+            accountValue = (double)Math.round((accountValue+ monthlySaving) * (1 + monthlyInterestRate) * 1000)/ 1000;
+        }
+        accountValue = (double)Math.round(accountValue * 100)/100;
 
         return accountValue;
     }
@@ -222,3 +240,4 @@ public class Kata {
 
     }
 }
+

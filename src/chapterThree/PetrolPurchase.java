@@ -22,10 +22,9 @@ public class PetrolPurchase {
         this.percentageDiscount = percentageDiscount;
     }
 
-    public double purchaseAmount(int purchaseQuantityLiter, double pricePerLiter, double percentageDiscount){
-       double purchaseAmount = 0.0;
+    public double purchaseAmount(){
 
-        purchaseAmount = (purchaseQuantityLiter * pricePerLiter) - percentageDiscount;
+        double purchaseAmount = (purchaseQuantityLiter * pricePerLiter) - percentageDiscount;
 
 
         return purchaseAmount;

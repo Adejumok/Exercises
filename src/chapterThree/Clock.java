@@ -1,5 +1,9 @@
 package chapterThree;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Clock {
     private int hour;
     private int minute;
@@ -12,33 +16,22 @@ public class Clock {
 
     }
 
-    public String displayTime(String time){
-        String displayTime = null;
-
-        System.out.printf("The time is %d:%d:%d%n", getHour(), getMinute(), getSecond());
-
-        return displayTime;
-
-    }
-
-    public void setHour(int hour) {
-        if (hour <= 23)
-        {this.hour = hour;
-        }
-        else {hour = 0;
-        }
+    public void displayTime() {
+        setHour(this.hour);
+        setMinute(this.minute);
+        setSecond(this.second);
+        System.out.println(getHour() + ":" + getMinute() + ":" + getSecond());
     }
 
     public int getHour() {
         return hour;
     }
 
-
-    public void setMinute(int minute) {
-        if (minute <= 59)
-        {this.minute = minute;
-        }
-        else {minute = 0;
+    public void setHour(int hour) {
+        if (hour <= 23) {
+            this.hour = hour;
+        } else {
+            this.hour = 00;
         }
     }
 
@@ -46,11 +39,11 @@ public class Clock {
         return minute;
     }
 
-    public void setSecond(int second) {
-        if (second <= 59)
-        {this.second = second;
-        }
-        else {second = 0;
+    public void setMinute(int minute) {
+        if (minute <= 59) {
+            this.minute = minute;
+        } else {
+            this.minute = 0;
         }
     }
 
@@ -58,6 +51,13 @@ public class Clock {
         return second;
     }
 
+    public void setSecond(int second) {
+        if (second <= 59) {
+            this.second = second;
+        } else {
+            this.second = 00;
+        }
+    }
 
 
 }

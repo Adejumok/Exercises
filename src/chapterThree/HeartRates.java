@@ -1,51 +1,23 @@
 package chapterThree;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class HeartRates {
     private String firstName;
     private String lastName;
-    private int yearOfBirth;
     private int monthOfBirth;
     private int dayOfBirth;
+    private int yearOfBirth;
 
-    public HeartRates(String firstNumber, String lastNumber, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
+    public HeartRates(String firstName, String lastName, int monthOfBirth, int dayOfBirth, int yearOfBirth) {
 
         this.firstName = firstName;
         this.lastName = lastName;
-        this.yearOfBirth = yearOfBirth;
         this.monthOfBirth = monthOfBirth;
         this.dayOfBirth = dayOfBirth;
+        this.yearOfBirth = yearOfBirth;
     }
-
-    public HeartRates() {
-
-    }
-
-    public int age(int years){
-        int age = 0;
-
-        return age;
-
-    }
-
-    public int maxHeartRate(int age){
-        int maxHeartRate = 0;
-
-        maxHeartRate = 220 - age;
-
-        return maxHeartRate;
-    }
-
-    public double targetHeartRate(int maxHeartRate){
-        double targetHeartRate = 0.0;
-
-        if(maxHeartRate >= 0.5 && maxHeartRate <= 0.85){
-            targetHeartRate = maxHeartRate;
-
-        }
-
-        return targetHeartRate;
-    }
-
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -65,31 +37,31 @@ public class HeartRates {
     }
 
 
-    public void setYearOfBirth(int yearOfBirth) {
+    public void setDateOfBirth(int monthOfBirth, int dayOfBirth, int yearOfBirth) {
+
+        this.monthOfBirth = monthOfBirth;
+        this.dayOfBirth = dayOfBirth;
         this.yearOfBirth = yearOfBirth;
     }
 
-    public int getYearOfBirth() {
-        return yearOfBirth;
+    public int getDateOfBirth() {
+        return this.monthOfBirth/this.dayOfBirth/this.yearOfBirth;
     }
 
-
-    public void setMonthOfBirth(int monthOfBirth) {
-        this.monthOfBirth = monthOfBirth;
+    public int getAge(){
+        LocalDate presentTime = LocalDate.now();
+        LocalDate birthDate = LocalDate.of(1985, 9, 12);
+        Period moment = Period.between(birthDate, presentTime);
+        int age = moment.getYears();
+        return age;
     }
 
-    public int getMonthOfBirth() {
-        return monthOfBirth;
+    public double maxHeartRate(){
+        return 220 - getAge();
     }
 
-
-    public void setDayOfBirth(int dayOfBirth) {
-        this.dayOfBirth = dayOfBirth;
+    public void targetHeartRate(){
+        System.out.println("Target Heart Rate Range is " + maxHeartRate() * 0.5 + " to " + maxHeartRate() * 0.85);
     }
-
-    public int getDayOfBirth() {
-        return dayOfBirth;
-    }
-
 
 }
