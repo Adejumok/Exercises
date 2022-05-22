@@ -1,8 +1,9 @@
 package tdd;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class AccountTest {
 
@@ -12,9 +13,9 @@ public class AccountTest {
         //given i have created an account
         Account nepaAccount = new Account();
         //when i check my balance
-        int balance = nepaAccount.getBalance();
+        int result = nepaAccount.getBalance();
         //confirm that my balance is zero
-        assertEquals(0, balance);
+        assertEquals(0, result);
     }
 
     @Test

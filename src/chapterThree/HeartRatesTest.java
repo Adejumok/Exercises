@@ -4,26 +4,24 @@ import java.util.Scanner;
 
 public class HeartRatesTest {
     public static void main(String[] args) {
-        HeartRates pride = new HeartRates();
+        HeartRates health = new HeartRates("Jumoke", "Adeyinka", 9, 25, 1978);
 
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Enter first name: ");
+        System.out.print("Enter First Name: ");
         String firstName = input.next();
 
-        System.out.print("Enter last name: ");
+        System.out.print("Enter Last Name: ");
         String lastName = input.next();
 
-        System.out.print("Enter year of birth: ");
+        System.out.print("Enter Date of Birth(in the format of month, day and year in numbers format seperated with space): ");
+        int monthOfBirth = input.nextInt();
+        int dayOfBirth = input.nextInt();
         int yearOfBirth = input.nextInt();
 
-        System.out.print("Enter month of birth: ");
-        int monthOfBirth = input.nextInt();
+        System.out.printf(firstName + " " + lastName + " is " + health.getAge() + " years old%n");
+        System.out.printf("Maximum Heart Rate is " + health.maxHeartRate() +"%n");
 
-        System.out.print("Enter day of birth: ");
-        int dayOfBirth = input.nextInt();
-
-        //System.out.printf("%s maximum heart rate: %d%n", pride.getFirstName(), pride.maxHeartRate());
-        //System.out.printf("%s target heart rate: %d%n", pride.getFirstName(), pride.targetHeartRate());
+        health.targetHeartRate();
     }
 }

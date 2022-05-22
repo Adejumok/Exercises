@@ -1,10 +1,11 @@
 package chapterThree;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class HealthProfileTest {
     public static void main(String[] args) {
-        HealthProfile health = new HealthProfile();
+        HealthProfile health = new HealthProfile("Parp", "Joyce", "Male", 02, 13, 1997, 50, 95.5);
 
         Scanner input = new Scanner(System.in);
 
@@ -17,14 +18,12 @@ public class HealthProfileTest {
         System.out.print("Enter gender: ");
         String gender = input.next();
 
-        System.out.print("Enter year of birth: ");
+        System.out.print("Enter Date of birth(represented in numbers starting with month, day then year all seperated with spaces): ");
+        int monthOfBirth = input.nextInt();
+        int dayOfBirth = input.nextInt();
         int yearOfBirth = input.nextInt();
 
-        System.out.print("Enter month of birth: ");
-        int monthOfBirth = input.nextInt();
-
-        System.out.print("Enter day of birth: ");
-        int dayOfBirth = input.nextInt();
+        LocalDate dateOfBirth = LocalDate.of(1993, 8, 14);
 
         System.out.print("Enter height in inches: ");
         double height = input.nextDouble();
@@ -32,7 +31,9 @@ public class HealthProfileTest {
         System.out.print("Enter weight in pounds: ");
         double weight = input.nextDouble();
 
-        //System.out.printf("%s maximum heart rate: %d%n", pride.getFirstName(), pride.maxHeartRate());
-        //System.out.printf("%s target heart rate: %d%n", pride.getFirstName(), pride.targetHeartRate());
+     //   System.out.println(firstName + " " + lastName + " is a " + gender + " and is " + health.getAge(1999-08-14) + " years");
+        System.out.println("Maximum Heart Rate is " + health.maxHeartRate());
+        health.targetHeartRate();
+        health.bmi();
     }
 }
