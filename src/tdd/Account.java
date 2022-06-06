@@ -7,6 +7,7 @@ public class Account {
     }
 
     public void deposit(int amount) {
+
         balance = balance + amount ;
     }
 
@@ -17,4 +18,6 @@ public class Account {
        }
        else{balance = balance;}
     }
+
+
 }

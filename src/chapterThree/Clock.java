@@ -10,6 +10,16 @@ public class Clock {
     private int second;
 
     public Clock(int hour, int minute, int second) {
+        if (hour < 0 || hour >= 24){
+            throw new IllegalArgumentException("hour must be 0-23");
+        }
+        if (minute < 0 || minute >= 59) {
+            throw new IllegalArgumentException("minute must be from 0-59");
+        }
+        if (second < 0 || second >= 59) {
+            throw new IllegalArgumentException("second must be from 0-59");
+        }
+
         this.hour = hour;
         this.minute = minute;
         this.second = second;
@@ -28,11 +38,10 @@ public class Clock {
     }
 
     public void setHour(int hour) {
-        if (hour <= 23) {
-            this.hour = hour;
-        } else {
-            this.hour = 00;
+        if (hour < 0 || hour >= 24) {
+            throw new IllegalArgumentException("hour must be from 0-23");
         }
+        this.hour = hour;
     }
 
     public int getMinute() {
@@ -40,24 +49,24 @@ public class Clock {
     }
 
     public void setMinute(int minute) {
-        if (minute <= 59) {
-            this.minute = minute;
-        } else {
-            this.minute = 0;
+        if (minute < 0 || minute >= 59) {
+            throw new IllegalArgumentException("minute must be from 0-59");
         }
-    }
+            this.minute = minute;
+        }
+
 
     public int getSecond() {
         return second;
     }
 
     public void setSecond(int second) {
-        if (second <= 59) {
-            this.second = second;
-        } else {
-            this.second = 00;
+        if (second < 0 || second >= 59) {
+            throw new IllegalArgumentException("second must be from 0-59");
         }
+        this.second = second;
     }
+
 
 
 }

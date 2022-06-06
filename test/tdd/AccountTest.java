@@ -40,5 +40,13 @@ public class AccountTest {
         assertEquals(0, asakeAccount.getBalance());
     }
 
+    @Test
+    public void pinCreatedTest(){
+        Account asakeAccount = new Account();
+//        asakeAccount.setPin();
+//        assertEquals();
+
+    }
+
 
 }

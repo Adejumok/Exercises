@@ -1,4 +1,4 @@
-package tdd.chapterEight;
+package chapterEight;
 
 import chapterEight.RectangleClass;
 import org.junit.jupiter.api.Test;

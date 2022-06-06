@@ -8,7 +8,7 @@ public class DiaryTest {
 
     @Test
     public void diaryCreatedTest(){
-        Diary babeDiary = new Diary("Pride Piper", "02-07-2021");
+        Diary babeDiary = new Diary();
         assertEquals("Pride Piper", babeDiary.getName());
         assertEquals("02-07-2021", babeDiary.getDateCreated());
     }
@@ -16,7 +16,7 @@ public class DiaryTest {
     public void addEntryTest(){
         Diary babeDiary = new Diary();
         //babeDiary.setTheEntries();
-        assertEquals("Bob Daddy", babeDiary.getTheEntries());
+        assertEquals("Bob Daddy", babeDiary.getEntry(0));
     }
 
 
