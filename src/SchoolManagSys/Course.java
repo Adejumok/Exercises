@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Course {
     private final String name;
-    private int id;
-    private boolean isActivateCourse=true;
+    private String id;
+    private boolean isCourseActivated;
     private ArrayList <Student> students= new ArrayList<>();
 
     public Course(String name) {
@@ -17,11 +17,11 @@ public class Course {
         return name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -29,27 +29,25 @@ public class Course {
     public String toString(){
         return String.format("""
                 Name: %s
-                Id: %d
+                Id: %s
                 """, name, id);
     }
 
     public void activateCourse() {
-        isActivateCourse = true;
+        isCourseActivated = true;
     }
 
     public boolean isActivateCourse() {
-        return isActivateCourse;
+        return isCourseActivated;
     }
 
     public void deactivate() {
-        isActivateCourse = false;
+        isCourseActivated = false;
     }
 
-    public Student setStudentOffering(String studentName) {
-        Student student = new Student(studentName);
-        student.setId(students.size()+1);
-        students.add(student);
-        return student;
+    public void setStudentOffering(Student student, School school) {
+        if(school.isStudentRegistered(student)){
+        students.add(student);}
     }
 
     public List<Student> getAllStudentsOffering() {

@@ -1,5 +1,6 @@
 package SchoolManagSys;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,8 @@ public class School {
     private ArrayList<Student>students = new ArrayList<>();
     private ArrayList<Course>courses = new ArrayList<>();
     private int id;
+    private int studentCount = 0;
+    private int courseCount = 0;
 
     public School(String name, int id){
         this.name = name;
@@ -22,57 +25,91 @@ public class School {
         return id;
     }
 
-    public Student admitStudent(String studentName) {
-        Student student = new Student(studentName);
-        student.setId(students.size()+1);
+    public Student admitStudent(Student student) {
+        if(isStudentRegistered(student)){
+            throw new StudentAlreadyExistException("student already exist!");}
+        else{
+            studentCount++;
+            String id = generatedId(name) + studentCount;
+        student.setId(id);
         students.add(student);
-        return student;
+        return student;}
     }
 
+
+    public boolean isStudentRegistered(Student student){
+        for(Student registeredStudent : students){
+            if(student.equals(registeredStudent)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isCourseRegistered(Course course){
+        for(Course registeredCourse : courses){
+            if(course.equals(registeredCourse)){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public int studentSize() {
         return students.size();
     }
 
-    public Student deleteStudentByName(String studentName) {
-        Student tempStudent;
-        for(Student student : students){
-            if(studentName.equalsIgnoreCase(student.getName())){
+    public Student deleteStudent(Student student) {
+        if(isStudentRegistered(student)){
+            Student tempStudent;
                 tempStudent = student;
                 students.remove(student);
                 return tempStudent;
             }
-        }
         throw new StudentNotFoundException("ops! student not found!");
-    }
+        }
 
     public List<Student> getAllStudents() {
         return students;
     }
 
-    public void addCourse(String courseName) {
-        Course course = new Course(courseName);
-        course.setId(courses.size()+1);
-        courses.add(course);
+
+    private String generatedId(String name){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            stringBuilder.append(name.charAt(i));
+        }
+        return stringBuilder.toString();
+    }
+
+    public void addCourse(Course course) {
+        if(isCourseRegistered(course) == true){
+            throw new CourseAlreadyExistException("Course already exists!");
+        }
+        else{
+            courseCount++;
+            course.setId(generatedId(course.getName()) + (courseCount));
+            courses.add(course);
+        }
     }
 
     public int getNumberOfCourses() {
         return courses.size();
     }
 
-    public String findCourseById(int id) {
+    public String findCourseById(String id) {
         for(Course course: courses){
-            if(id == course.getId()){
+            if(id.equalsIgnoreCase(course.getId())){
                 return course.getName();
             }
         }
         throw new CourseNotFoundException("course not found!");
     }
 
-    public Course deleteCourseByName(String courseName) {
+    public Course deleteCourse(Course course) {
         Course tempCourse;
-        for (Course course : courses){
-            if (courseName.equalsIgnoreCase(course.getName())){
+        for (Course foundCourse : courses){
+            if (course.equals(foundCourse)){
                 tempCourse = course;
                 courses.remove(course);
                 return tempCourse;

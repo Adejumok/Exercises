@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Student {
     private String name;
-    private int id;
-    private ArrayList <Course> courses= new ArrayList<>();
+    private String id;
+    private ArrayList <Course> offeredCourses= new ArrayList<>();
 
     public Student(String studentName) {
         name = studentName;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -20,7 +20,7 @@ public class Student {
         return name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -28,28 +28,41 @@ public class Student {
     public String toString(){
        return String.format("""
                Name : %s
-               Id : %d\s""",name,id);
+               Id : %s\s""",name,id);
     }
 
-    public Course selectCourse(String courseName) {
-        Course course = new Course(courseName);
-        course.setId(courses.size()+1);
-        courses.add(course);
-        return course;
+    public Course selectCourse(Course course, School school) {
+        List<Course> availableCourses = school.getAllCourses();
+        for(Course checkedCourse : availableCourses){
+            if(course.equals(checkedCourse)){
+                offeredCourses.add(course);
+                return course;
+            }
+        }
+       throw new CourseNotFoundException("Course not found!");
     }
 
     public List <Course> viewCourses() {
-        return courses;
+        return offeredCourses;
     }
 
-    public Course dropCourse(String courseName) {
+    public Course dropCourse(Course course) {
         Course tempCourse;
-        for (Course course:courses){
-            if (courseName.equalsIgnoreCase(course.getName())){
+        for (Course foundCourse:offeredCourses){
+            if (course.equals(foundCourse)){
                 tempCourse = course;
-                courses.remove(course);
+                offeredCourses.remove(course);
                 return tempCourse;
             }
         }throw new CourseNotFoundException("Course not found!");
+    }
+
+    public void withdraw(School school){
+        List<Student> students = school.getAllStudents();
+        for (Student student : students) {
+            if (name.equalsIgnoreCase(student.getName()) && id.equalsIgnoreCase(student.getId())) {
+                school.deleteStudent(student);
+            }
+        }
     }
 }

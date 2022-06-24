@@ -10,14 +10,24 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SchoolTest {
 
     private School school;
-    private Course course;
-    private Student student;
+    private Student Gbenga;
+    private Student Shola;
+    private Student Funmi;
+    private Course Biology;
+    private Course Yoruba;
+    private Course French;
+    private Course Latin;
 
     @BeforeEach
     void setUp(){
-        school = new School("YabaLeft",1);
-        course = new Course("Architecture");
-        student = new Student("Quadri");
+     school = new School("Union Baptist", 1);
+     Gbenga = new Student("Gbenga");
+     Shola = new Student("Shola");
+     Funmi = new Student("Funmi");
+     Biology = new Course("Biology");
+     Yoruba = new Course("Yoruba");
+     French = new Course("French");
+     Latin = new Course("Latin");
     }
     @Test
     void testThatSchoolExist (){
@@ -26,149 +36,160 @@ public class SchoolTest {
 
     @Test
     void testThatSchoolDetailsCanBeAdded(){
-        assertEquals("YabaLeft",school.getName());
+        assertEquals("Union Baptist",school.getName());
         assertEquals(1,school.getId());
     }
 
     @Test
     void testThatSchoolCanAdmitStudent(){
-        school.admitStudent("Gbenga");
+        school.admitStudent(Gbenga);
         assertEquals(1,school.studentSize());
     }
 
     @Test
     void testThatSchoolCanAdmitMultipleStudents(){
-        Student Gbenga = school.admitStudent("Gbenga");
-        Student Shola = school.admitStudent("Shola");
-        Student Funmi = school.admitStudent("Funmi");
+        school.admitStudent(Gbenga);
+        assertEquals("Uni1",Gbenga.getId());
+
+        school.admitStudent(Shola);
+        assertEquals("Uni2",Shola.getId());
+
+        school.admitStudent(Funmi);
+        assertEquals("Uni3",Funmi.getId());
+
         assertEquals(3,school.studentSize());
-        assertEquals(3,Funmi.getId());
-        assertEquals(2,Shola.getId());
+
+
     }
     @Test
     void testThatSchoolCanDeleteStudentRecord(){
-        school.admitStudent("Gbenga");
-        school.admitStudent("Shola");
-        school.admitStudent("Funmi");
-        school.deleteStudentByName("Shola");
-        assertThrows(StudentNotFoundException.class,()->school.deleteStudentByName("Bisi"));
+        school.admitStudent(Gbenga);
+        school.admitStudent(Shola);
+        school.admitStudent(Funmi);
+        school.deleteStudent(Shola);
+
+        Student Bisi = new Student("Bisi");
+        assertThrows(StudentNotFoundException.class,()->school.deleteStudent(Bisi));
         assertEquals(2,school.studentSize());
     }
     @Test
     void testThatAllStudentCanBeGotten(){
-        school.admitStudent("Gbenga");
-        school.admitStudent("Shola");
-        school.admitStudent("Funmi");
+        school.admitStudent(Gbenga);
+        school.admitStudent(Shola);
+        school.admitStudent(Funmi);
+
         List<Student> students = school.getAllStudents();
         assertEquals("""
                 [Name : Gbenga
-                Id : 1 , Name : Shola
-                Id : 2 , Name : Funmi
-                Id : 3 ]""",students.toString());
+                Id : Uni1 , Name : Shola
+                Id : Uni2 , Name : Funmi
+                Id : Uni3 ]""",students.toString());
     }
     @Test
     void testThatCourseCanBeAdded(){
-        school.addCourse("Biology");
+        school.addCourse(Biology);
         assertEquals(1,school.getNumberOfCourses());
     }
 
     @Test
     void testThatCourseCanBeFound(){
-        school.addCourse("Biology");
-        school.addCourse("Yoruba");
-        school.addCourse("French");
-        school.addCourse("Latin");
-        assertEquals("French",school.findCourseById(3));
+        school.addCourse(Biology);
+        school.addCourse(Yoruba);
+        school.addCourse(French);
+
+        assertEquals("French",school.findCourseById("Fre3"));
 
     }
 
     @Test
     void testThatCourseCanBeDeleted(){
-        school.addCourse("Biology");
-        school.addCourse("Yoruba");
-        school.addCourse("French");
-        school.addCourse("Latin");
-        school.deleteCourseByName("Biology");
-        assertEquals(3,school.getNumberOfCourses());
+        school.addCourse(Biology);
+        school.addCourse(Yoruba);
+        school.addCourse(French);
+        school.deleteCourse(Biology);
+        assertEquals(2,school.getNumberOfCourses());
     }
 
     @Test
     void testThatAllCoursesCanBeGotten(){
-        school.addCourse("Biology");
-        school.addCourse("Yoruba");
-        school.addCourse("French");
+        school.addCourse(Biology);
+        school.addCourse(Yoruba);
+        school.addCourse(French);
         List<Course>courses = school.getAllCourses();
         assertEquals("""
                 [Name: Biology
-                Id: 1
+                Id: Bio1
                 , Name: Yoruba
-                Id: 2
+                Id: Yor2
                 , Name: French
-                Id: 3
+                Id: Fre3
                 ]""", courses.toString());
     }
 
     @Test
     void testThatCourseCanBeActivated(){
-        assertTrue(course.isActivateCourse());
+        Yoruba.activateCourse();
+        assertTrue(Yoruba.isActivateCourse());
     }
 
     @Test
     void testThatCourseCanBeDeactivated(){
-        assertTrue(course.isActivateCourse());
+        French.activateCourse();
+        assertTrue(French.isActivateCourse());
 
-        course.deactivate();
-        assertFalse(course.isActivateCourse());
-    }
-
-    @Test
-    void testThatCourseCanBeActivatedAgain(){
-        course.deactivate();
-        assertFalse(course.isActivateCourse());
-
-        course.activateCourse();
-        assertTrue(course.isActivateCourse());
+        French.deactivate();
+        assertFalse(French.isActivateCourse());
     }
 
     @Test
     void testThatWeCanSetStudentOfferingACourse(){
-        course.setStudentOffering("Bolaji");
-        course.setStudentOffering("Yoggo");
-        List<Student>students = course.getAllStudentsOffering();
+        school.admitStudent(Gbenga);
+        school.admitStudent(Shola);
+        school.admitStudent(Funmi);
+        Yoruba.setStudentOffering(Funmi,school);
+        Yoruba.setStudentOffering(Gbenga, school);
+        List<Student>students = Yoruba.getAllStudentsOffering();
         assertEquals("""
-                [Name : Bolaji
-                Id : 1 , Name : Yoggo
-                Id : 2 ]""", students.toString());
+                [Name : Funmi
+                Id : Uni3 , Name : Gbenga
+                Id : Uni1 ]""", students.toString());
     }
 
     @Test
     void testThatStudentCanSelectCourse(){
-        student.selectCourse("Biology");
-        student.selectCourse("Yoruba");
-        student.selectCourse("French");
-        List<Course>courses = student.viewCourses();
+        school.addCourse(Yoruba);
+        school.addCourse(Biology);
+        school.addCourse(French);
+        Funmi.selectCourse(Yoruba,school);
+        Funmi.selectCourse(Biology,school);
+        Funmi.selectCourse(French,school);
+        List<Course>courses = Funmi.viewCourses();
         assertEquals("""
-                [Name: Biology
-                Id: 1
-                , Name: Yoruba
-                Id: 2
+                [Name: Yoruba
+                Id: Yor1
+                , Name: Biology
+                Id: Bio2
                 , Name: French
-                Id: 3
+                Id: Fre3
                 ]""", courses.toString());
     }
 
     @Test
     void testThatStudentCanDropCourse(){
-        student.selectCourse("Greek");
-        student.selectCourse("Portuguese");
-        student.selectCourse("Chinese");
-        student.dropCourse("Portuguese");
-        List<Course>courses = student.viewCourses();
+        school.addCourse(Yoruba);
+        school.addCourse(Biology);
+        school.addCourse(French);
+
+        Funmi.selectCourse(Yoruba,school);
+        Funmi.selectCourse(Biology,school);
+        Funmi.selectCourse(French,school);
+        Funmi.dropCourse(French);
+        List<Course>courses = Funmi.viewCourses();
         assertEquals("""
-                [Name: Greek
-                Id: 1
-                , Name: Chinese
-                Id: 3
+                [Name: Yoruba
+                Id: Yor1
+                , Name: Biology
+                Id: Bio2
                 ]""", courses.toString());
     }
 }
