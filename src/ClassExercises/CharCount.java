@@ -3,7 +3,7 @@ package ClassExercises;
 public class CharCount {
 
     public static void main(String[] args) {
-        charCount("abcdabcdabca",'a');
+        charCount("abcdabcdabca",'d');
     }
 
     private static void charCount(String word, char theChar){

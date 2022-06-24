@@ -3,6 +3,8 @@ package turtleGraphics;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static turtleGraphics.Direction.*;
 
@@ -133,15 +135,61 @@ public class TurtleTest {
         assertEquals(new Position(0,10), bubu.getCurrentPosition());
     }
 
-//    @Test
-//    public void turtleCanMoveForwardFacingSouth(){
-//        bubu.turnRight();
-//        assertSame(SOUTH, bubu.getCurrentDirection());
-//        bubu.move(5);
-//        bubu.move(5);
-//
-//        assertEquals(new Position(0,10), bubu.getCurrentPosition());
-//    }
+    @Test
+    public void turtleCanMoveForwardFacingSouth(){
+        assertSame(EAST, bubu.getCurrentDirection());
+        bubu.move(5, sc);
+        bubu.move(5, sc);
+
+        bubu.turnRight();
+        assertSame(SOUTH, bubu.getCurrentDirection());
+        bubu.move(5,sc);
+        bubu.move(5,sc);
+
+        assertEquals(new Position(0,10), bubu.getCurrentPosition());
+    }
+
+    @Test
+    public void turtleCanMoveForwardFacingWest(){
+        assertSame(EAST, bubu.getCurrentDirection());
+        bubu.move(5, sc);
+        bubu.move(5, sc);
+
+        bubu.turnRight();
+        assertSame(SOUTH, bubu.getCurrentDirection());
+        bubu.move(5,sc);
+        bubu.move(5,sc);
+
+        bubu.turnRight();
+        assertSame(WEST, bubu.getCurrentDirection());
+        bubu.move(5,sc);
+        bubu.move(5,sc);
+
+        assertEquals(new Position(0,10), bubu.getCurrentPosition());
+    }
+
+    @Test
+    public void turtleCanMoveForwardFacingNorth(){
+        bubu.move(5, sc);
+        bubu.move(5, sc);
+
+        bubu.turnRight();
+        assertSame(SOUTH, bubu.getCurrentDirection());
+        bubu.move(5,sc);
+        bubu.move(5,sc);
+
+        bubu.turnRight();
+        assertSame(WEST, bubu.getCurrentDirection());
+        bubu.move(5,sc);
+        bubu.move(5,sc);
+
+        bubu.turnRight();
+        assertSame(NORTH, bubu.getCurrentDirection());
+        bubu.move(5,sc);
+        bubu.move(5,sc);
+
+        assertEquals(new Position(0,10), bubu.getCurrentPosition());
+    }
 
     @Test
     public void whenPenIsDown_turtleCanWriteWhileMovingTest(){
@@ -151,10 +199,78 @@ public class TurtleTest {
         int currentRow = bubu.getCurrentPosition().getRow();
         bubu.move(5,sc);
 
-        assertEquals(new Position(0,5), bubu.getCurrentPosition());
+
+        assertEquals(new Position(0,4), bubu.getCurrentPosition());
         int[][] floor = sc.getFloor();
+
+        System.out.println(Arrays.deepToString(floor));
         for (int i = currentColumn; i < currentColumn+5; i++) {
             assertEquals(1,floor[currentRow][i]);
+        }
+    }
+
+    @Test
+    public void whenPenIsDown_turtleCanWriteWhileMovingSouthTest(){
+        bubu.turnRight();
+        assertSame(SOUTH, bubu.getCurrentDirection());
+        bubu.penDown();
+        int currentColumn = bubu.getCurrentPosition().getColumn();
+        int currentRow = bubu.getCurrentPosition().getRow();
+        bubu.move(5,sc);
+
+
+        assertEquals(new Position(4,0), bubu.getCurrentPosition());
+        int[][] floor = sc.getFloor();
+
+        System.out.println(Arrays.deepToString(floor));
+        for (int i = currentRow; i < currentRow+5; i++) {
+            assertEquals(1,floor[i][currentColumn]);
+        }
+    }
+
+    @Test
+    public void whenPenIsDown_turtleCanWriteWhileMovingWestTest(){
+        bubu.move(5,sc);
+        bubu.turnRight();
+        bubu.turnRight();
+
+        assertSame(WEST, bubu.getCurrentDirection());
+        bubu.penDown();
+        int currentColumn = bubu.getCurrentPosition().getColumn();
+        int currentRow = bubu.getCurrentPosition().getRow();
+        bubu.move(5,sc);
+
+
+        assertEquals(new Position(0,0), bubu.getCurrentPosition());
+        int[][] floor = sc.getFloor();
+
+        System.out.println(Arrays.deepToString(floor));
+        for (int i = currentColumn; i > currentColumn-5; i--) {
+            assertEquals(1,floor[currentRow][i]);
+        }
+    }
+
+    @Test
+    public void whenPenIsDown_turtleCanWriteWhileMovingNorthTest(){
+        bubu.turnRight();
+        bubu.move(5,sc);
+        bubu.turnRight();
+        bubu.turnRight();
+
+
+        assertSame(NORTH, bubu.getCurrentDirection());
+        bubu.penDown();
+        int currentColumn = bubu.getCurrentPosition().getColumn();
+        int currentRow = bubu.getCurrentPosition().getRow();
+        bubu.move(5,sc);
+
+
+        assertEquals(new Position(0,0), bubu.getCurrentPosition());
+        int[][] floor = sc.getFloor();
+
+        System.out.println(Arrays.deepToString(floor));
+        for (int i = currentRow; i > currentRow-5; i--) {
+            assertEquals(1,floor[i][currentColumn]);
         }
     }
 }
