@@ -83,7 +83,7 @@ public class School {
     }
 
     public void addCourse(Course course) {
-        if(isCourseRegistered(course) == true){
+        if(isCourseRegistered(course)){
             throw new CourseAlreadyExistException("Course already exists!");
         }
         else{
