@@ -47,14 +47,9 @@ public class IVRCorrectionSuggestion {
                 System.out.println("Enter a number: ");
                 userResponse = keyboardInput.nextInt();
                 switch (userResponse) {
-                    case '1':
-                        System.out.println("sharing");
-                        break;
-                    case '2':
-                        System.out.println("caring");
-                        break;
-                    default:
-                        System.out.println("Invalid");
+                    case '1' -> System.out.println("sharing");
+                    case '2' -> System.out.println("caring");
+                    default -> System.out.println("Invalid");
                 }
             }
             case '3' -> {
