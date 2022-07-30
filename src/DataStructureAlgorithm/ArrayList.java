@@ -36,6 +36,14 @@ public class ArrayList implements List {
         return size;
     }
 
+    public void set(int index, String item){
+        for (int i = 0; i < elements.length; i++) {
+            if (i==index){
+                elements[i]=item;
+            }
+        }
+    }
+
     public String get(int index) {
         return elements[index];
     }

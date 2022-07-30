@@ -73,7 +73,7 @@ public class SchoolTest {
         assertEquals(2,school.studentSize());
     }
     @Test
-    void testThatAllStudentCanBeGotten(){
+    void testThatSchoolCanAllStudentCanBeGotten(){
         school.admitStudent(Gbenga);
         school.admitStudent(Shola);
         school.admitStudent(Funmi);

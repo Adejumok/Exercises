@@ -78,6 +78,25 @@ public class QueueTest {
     public void addMoreThanOneItem_removeFirstItemTest(){
         queue.add("Cookie");
         queue.add("Chips");
+        queue.add("Parfait");
+        queue.add("Pizza");
         assertEquals("Chips",queue.remove());
+    }
+
+    @Test
+    public void cannotExceedLimitTest(){
+        queue.add("Cookie");
+        queue.add("Chips");
+        queue.add("Parfait");
+        queue.add("Pizza");
+        queue.add("Cookie");
+        queue.add("Chips");
+        queue.add("Parfait");
+        queue.add("Pizza");
+        queue.add("Cookie");
+        queue.add("Chips");
+        queue.add("Parfait");
+        queue.add("Pizza");
+        assertThrows(IndexOutOfBoundsException.class,()->queue.size());
     }
 }

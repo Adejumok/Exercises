@@ -1,13 +1,11 @@
 package DiaryM;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Diary {
     private String name;
-
-    private LocalDateTime localDateTime;
-    private int id=0;
+    private int id;
     private ArrayList<Entry> theEntries= new ArrayList<>();
     public Diary(String name){
         this.name=name;
@@ -17,15 +15,15 @@ public class Diary {
         this.name= name;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override
@@ -35,54 +33,62 @@ public class Diary {
                 """, name);
     }
 
-    private String generateId(String title){
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < 2; i++) {
-            stringBuilder.append(title.charAt(i));
-        }
-        return stringBuilder.toString();
-    }
-
     public void addEntry(Entry entry) {
         if (theEntries.contains(entry)){
             throw new RuntimeException("Huush! Entry already exist");
         }else {
-            entry.setId(++id);
             theEntries.add(entry);
         }
     }
 
-    public int getNumberOfEntries() {
+    public int getEntriesSize() {
         return theEntries.size();
     }
 
-    public String getEntry(int id) {
-        for (Entry findEntry:theEntries){
-            if (id==(findEntry.getId())){
-                return findEntry.getTitle();
+    public Entry getEntry(int id) {
+        return theEntries.get(id-1);
+    }
+    
+    private int getEntryIndex(String entryTitle){
+        for (int index=0;index< theEntries.size();index++) {
+            Entry theEntry=theEntries.get(index);
+            if (theEntry.getTitle().equalsIgnoreCase(entryTitle)){
+                return index;
             }
-        }throw new RuntimeException("Kai! Entry does not exist.");
-
-    }
-
-    public int getAllEntries() {
-        return theEntries.size();
-    }
-
-    public void editEntry(Entry entry, int id) {
-        if (!theEntries.contains(entry)) {
-            throw new RuntimeException();
-        } else {
-            theEntries.set(id-1,entry);
         }
+        return -1;
     }
 
-    public void deleteEntry(Entry entry) {
-        if (!theEntries.contains(entry)) {
-            throw new RuntimeException();
-        } else {
-            theEntries.remove(entry);
+    public void editEntryTitle(String entryTitle,String newTitle) {
+        int position=getEntryIndex(entryTitle);
+        if (position>=0){
+            theEntries.get(position).setTitle(newTitle);
         }
+        else{
+        System.out.println("This entry does not exist!");}
+    }
 
+    public void editEntryBody(String oldEntryTitle,String newBody) {
+        int position=getEntryIndex(oldEntryTitle);
+        if (position>=0){
+            theEntries.get(position).setBody(newBody);
+        }
+        else{
+            System.out.println("This entry does not exist!");}
+    }
+
+    public void deleteEntry(String entryTitle) {
+        int position=getEntryIndex(entryTitle);
+        if (position>=0){
+            theEntries.remove(position);
+        }
+        else{
+        System.out.println("This entry does not exist!");}
+    }
+    public List<Entry> printAllEntries() {
+        if (theEntries.isEmpty()){
+            System.out.println("There is no entry in this diary!");
+        }
+        return theEntries;
     }
 }

@@ -34,4 +34,8 @@ public class Set{
         }
         return false;
     }
+
+    public String get(int index){
+        return set.get(index);
+    }
 }

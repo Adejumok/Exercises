@@ -3,6 +3,7 @@ package DataStructureAlgorithm;
 import java.util.NoSuchElementException;
 
 public class Queue {
+    private int queueLimit=10;
     private ArrayList queue= new ArrayList();
 
     public boolean isEmpty() {
@@ -10,7 +11,7 @@ public class Queue {
     }
 
     public void add(String item) {
-        queue.add(item);
+            queue.add(item);
     }
 
     public void offer(String item) {
@@ -18,7 +19,10 @@ public class Queue {
     }
 
     public int size() {
-        return queue.size();
+        if (queue.size() < queueLimit){
+            return queue.size();
+        }
+        throw new IndexOutOfBoundsException("You've exceeded the queue limit!");
     }
 
     public String peek() {

@@ -29,7 +29,7 @@ public class StackTest {
     public void notEmptyPushMoreThanOneItem_removeOneTest(){
         stack.push("Java Textbook");
         stack.push("DataBase Textbook");
-        stack.pop("Java Textbook");
+        stack.pop();
         assertFalse(stack.isEmpty());
     }
 
@@ -38,7 +38,7 @@ public class StackTest {
         stack.push("Java Textbook");
         stack.push("DataBase Textbook");
         stack.push("Python Textbook");
-        stack.pop("Java Textbook");
+        stack.pop();
 
         assertEquals(2, stack.size());
     }
@@ -49,5 +49,31 @@ public class StackTest {
         stack.push("DataBase Textbook");
         stack.push("Python Textbook");
         assertEquals("Python Textbook", stack.peek());
+    }
+
+    @Test
+    public void cannotExceedLimitTest(){
+        stack.push("Cookie");
+        stack.push("Chips");
+        stack.push("Parfait");
+        stack.push("Pizza");
+        stack.push("Cookie");
+        stack.push("Chips");
+        stack.push("Parfait");
+        stack.push("Pizza");
+        stack.push("Cookie");
+        stack.push("Chips");
+        stack.push("Parfait");
+        stack.push("Pizza");
+        assertThrows(IndexOutOfBoundsException.class,()->stack.size());
+    }
+
+    @Test
+    public void searchAnItemTest(){
+        stack.push("Parfait");
+        stack.push("Pizza");
+        stack.push("Cookie");
+        stack.push("Chips");
+        //assertEquals(3,stack.search(Pizza));
     }
 }

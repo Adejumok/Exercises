@@ -1,7 +1,8 @@
-package tdd;
+package HomeWork;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tdd.Homewrk;
 
 import static org.junit.jupiter.api.Assertions.*;
 
